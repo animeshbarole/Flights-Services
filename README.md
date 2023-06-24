@@ -46,3 +46,6 @@ Lets take a look inside the `src` folder
  ```
  npm run dev
  ```
+
+
+ - To Create Intialize the database 
