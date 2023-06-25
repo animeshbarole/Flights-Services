@@ -5,9 +5,10 @@ const {AirplaneController}  = require('../../controllers')
 const router  = express.Router();
 
 console.log("Inside the airplane Route")
-router
-.post('/',
+router.post('/',
    AirplaneMiddlewares.validateCreateRequest, 
    AirplaneController.createAirplane)
+
+router.get('/',AirplaneController.getAirplanes);   
 
 module.exports = router;
