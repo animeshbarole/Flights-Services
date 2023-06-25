@@ -12,16 +12,11 @@ class CrudRepository{
 
     async create(data)
     {
-      console.log("inside repository")
      
-        try {
-           
+    
              const response = await this.model.create(data)
              return response;
-        } catch (error) {
-              Logger.error('SomeThing went wrong in the Crud Repository :Create');
-                throw error;
-        }
+     
     }
 
     async destroy(data)

@@ -2,6 +2,8 @@ const {StatusCodes} = require('http-status-codes');
 
 const {AirplaneService} = require('../services');
 
+const {ErrorResponse,SuccessResponse} = require('../utils/common')
+
 
 
 async function createAirplane(req,res){
@@ -16,28 +18,18 @@ async function createAirplane(req,res){
               Capacity : req.body.Capacity,
 
         });
+         
+        SuccessResponse.data =airplane
         return res.status(StatusCodes.CREATED)
-                  .json(
-                    {
-                        success :true,
-                        message :"Successfully Created an Airplane",
-                        data : {airplane},
-                        error : {}
-                    }
-                  );
+                  .json( SuccessResponse );
         
     } catch (error) {
-
+   
+        ErrorResponse.error = error 
         return res
-                  .status(StatusCodes.INTERNAL_SERVER_ERROR)
-                  .json(
-                    {
-                        success :false,
-                        message :"SomeThing went wrong while creating an Airplane",
-                        data : {},
-                        error : error
-                    }
-                  );
+                  .status(error.statusCode) //Error has Self Property statusCode we simply not write again we just
+                                            //Pass it with statusCode
+                  .json(ErrorResponse);
         
     }
       
