@@ -94,9 +94,31 @@ async function getAirplane(req,res)
     }
 }
 
+async function deleteAirplane(req,res)
+{
+    try{ 
+         
+         const airplanes = await AirplaneService.deleteAirplane(req.params.id);
+         SuccessResponse.data = airplanes;
+
+         return res.
+                   status(StatusCodes.OK)
+                  .json( SuccessResponse );
+
+    }catch(error) 
+    {
+        ErrorResponse.error = error 
+        return res
+                  .status(error.statusCode) //Error has Self Property statusCode we simply not write again we just
+                                            //Pass it with statusCode
+                  .json(ErrorResponse);
+    }
+}
+
 
 module.exports = {
     createAirplane,
     getAirplanes,
-    getAirplane
+    getAirplane,
+    deleteAirplane
 }

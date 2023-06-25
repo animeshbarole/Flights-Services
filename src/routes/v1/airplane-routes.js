@@ -5,22 +5,37 @@ const {AirplaneController}  = require('../../controllers')
 const router  = express.Router();
 
 
-//Post Request
-//api/v1/airplanes/ 
+/*
+Post Request
+api/v1/airplanes/ 
+*/
 
-console.log("Inside the airplane Route")
 router.post('/',
    AirplaneMiddlewares.validateCreateRequest, 
    AirplaneController.createAirplane)
 
- 
-  // get Request 
- // api/v1/airplanes/     
 
+/*
+get Request
+api/v1/airplanes/ 
+*/
 router.get('/',AirplaneController.getAirplanes);  
 
-
-// api/v1/airplanes/:id
+/*
+get Request
+api/v1/airplanes/:id 
+*/
 router.get('/:id',AirplaneController.getAirplane);
+
+
+/*
+delete Request
+api/v1/airplanes/:id 
+
+ { data =0 means we deleted not available file
+    data  = 1 response json we delete available file }
+*/
+
+router.delete('/:id',AirplaneController.deleteAirplane);
 
 module.exports = router;
