@@ -42,9 +42,34 @@ async function getAirplanes()
 
       }
 }
+async function getAirplane(id)
+{
+      try{
+             
+             const airplane= await airplaneRepository.get(id);
+             return airplane;
+      }
+      catch(error){
+
+         
+        /*
+         Error come from
+           Respository -> Services -> Controller -> Routes -> index 
+          */
+
+        if(error.statusCode==StatusCodes.NOT_FOUND)
+        {
+               throw new AppError('The airplane you requested is not present ',error.statusCode);
+        }
+          
+        throw new AppError('Not able to fectch data of all the data  airplanes',StatusCodes.INTERNAL_SERVER_ERROR)
+
+      }
+}
  
 
 module.exports = {
     createAirplane,
-    getAirplanes
+    getAirplanes,
+    getAirplane
 }

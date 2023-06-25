@@ -62,7 +62,41 @@ async function getAirplanes(req,res)
     }
 }
 
+
+/*
+   
+  (Req,Res) => 
+
+   get -> /airplanes/:id 
+   req-body =>{}
+
+ */
+
+async function getAirplane(req,res)
+{
+    try{ 
+         
+        console.log("inside controller");
+         const airplane = await AirplaneService.getAirplane(req.params.id);
+         SuccessResponse.data = airplane;
+
+         return res.
+                   status(StatusCodes.OK)
+                  .json( SuccessResponse );
+
+    }catch(error) 
+    {
+        ErrorResponse.error = error 
+        return res
+                  .status(error.statusCode) //Error has Self Property statusCode we simply not write again we just
+                                            //Pass it with statusCode
+                  .json(ErrorResponse);
+    }
+}
+
+
 module.exports = {
     createAirplane,
-    getAirplanes
+    getAirplanes,
+    getAirplane
 }

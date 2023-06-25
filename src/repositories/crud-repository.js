@@ -1,5 +1,7 @@
 
+const { StatusCodes } = require('http-status-codes');
 const {Logger} = require('../config');
+const AppError = require('../utils/errors/app-error');
 
 class CrudRepository{
        
@@ -34,8 +36,15 @@ class CrudRepository{
 
     async get(data)
     {
-       const response = await this.model.findbyPk(data)
-      return response;
+       const response = await this.model.findByPk(data)
+
+        
+       //If someHow we pass the id which is not available in the table
+       if(!response)
+       {
+         throw new AppError('Not able to find the resource ',StatusCodes.NOT_FOUND)
+       }
+       return response;
        
     }
 
