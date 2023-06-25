@@ -16,16 +16,24 @@ module.exports = (sequelize, DataTypes) => {
   Airplane.init({
     modelNumber:{
       type: DataTypes.STRING,
-      allowNull:false,             //We dont want table contraints to be NULL 
+      allowNull:false,   
+                //We dont want table contraints to be NULL
+      
+            
       },
     Capacity: {
       type: DataTypes.INTEGER,
       allowNull:false,   
-      defaultValue :0          
+      defaultValue: 0,
+      validate:{
+        max :1000,
+      }
+        
       }
   }, {
     sequelize,
     modelName: 'Airplane',
+  
   });
   return Airplane;
 };
