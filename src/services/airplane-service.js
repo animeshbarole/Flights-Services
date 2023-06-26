@@ -13,7 +13,7 @@ async function createAirplane(data){
          return airplane;
     } catch (error) {
         
-            
+        
             if(error.name == 'SequelizeValidationError')
             {
                  let explaination = [];
