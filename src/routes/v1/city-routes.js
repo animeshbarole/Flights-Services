@@ -18,8 +18,13 @@ Post Request
 api/v1/cities/:id 
 */
 
-router.delete('/:id',CityController.deleteAirplane);
+router.delete('/:id',CityController.deleteCity);
 
+
+/*/api/v1/cities - PATCH
+Req Body: {name:anything }
+*/
+router.patch('/:id',CityController.updateCity);
 
 
 module.exports = router;

@@ -52,9 +52,28 @@ async function deleteCity(id)
       }
 }
 
+async function updateCity(data,id)
+{
+       try{
+        const response= await cityRepository.update(data,id);
+        return response;
+          }
+           catch(error){
+   
+                   if(error.statusCode==StatusCodes.NOT_FOUND)
+                   {
+                          throw new AppError('The City you requested to update is not present ',error.statusCode);
+                   }
+                     
+                  throw new AppError('Not able to fectch data of all the airplanes',StatusCodes.INTERNAL_SERVER_ERROR)
+
+ }}
+
 
 
 module.exports = {
     createCity,
-    deleteCity
+    deleteCity,
+    updateCity
+    
 }

@@ -118,14 +118,14 @@ async function deleteAirplane(req,res)
 async function updateAirplane(req,res)
 {
     try{ 
-         
+
          const airplanes = await AirplaneService.updateAirplane({
             Capacity : req.body.Capacity
          },req.params.id);
          SuccessResponse.data = airplanes;
 
          return res.
-                   status(StatusCodes.OK)
+                   status(StatusCodes.CREATED)
                   .json( SuccessResponse );
 
     }catch(error) 
@@ -137,7 +137,6 @@ async function updateAirplane(req,res)
                   .json(ErrorResponse);
     }
 }
-
 
 module.exports = {
     createAirplane,
