@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       
         this.belongsTo(models.City,{
           foreignKey:'cityID',
-          onDelete:'CASCADE',
-          onUpdate:'CASCADE'
+         
+          
         })
     }
   }
