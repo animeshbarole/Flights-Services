@@ -21,7 +21,7 @@ const {ErrorResponse,SuccessResponse} = require('../utils/common')
        price : 2000
        boardingGate : '12A' 
        totalSeats : 120
- }
+  }
 
  */
 
@@ -56,7 +56,31 @@ async function createFlight(req,res){
                   .json(ErrorResponse);
         
     }
+
+
+
       
+}
+
+async function getAllFlights(req,res)
+{
+     try{
+        const flights = await FlightService.getAllFlights(req.query);
+
+        SuccessResponse.data =flights
+        return res.status(StatusCodes.CREATED)
+                  .json( SuccessResponse );
+        
+    } catch (error) {
+   
+        ErrorResponse.error = error 
+        return res
+                  .status(error.statusCode) //Error has Self Property statusCode we simply not write again we just
+                                            //Pass it with statusCode
+                  .json(ErrorResponse);
+        
+    }
+
 }
 
 /**async function getAirports(req,res)
@@ -160,6 +184,6 @@ async function deleteAirport(req,res)
 
 module.exports = {
     createFlight,
-    
+    getAllFlights,
     //updateAirplane
 }
