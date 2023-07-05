@@ -83,6 +83,30 @@ async function getAllFlights(req,res)
 
 }
 
+async function getFlight(req,res)
+{
+    try{ 
+         
+      
+         const flight = await FlightService.getFlight(req.params.id);
+         SuccessResponse.data = flight;
+
+         return res.
+                   status(StatusCodes.OK)
+                  .json( SuccessResponse );
+
+    }catch(error) 
+    {
+        ErrorResponse.error = error 
+        return res
+                  .status(error.statusCode) //Error has Self Property statusCode we simply not write again we just
+                                            //Pass it with statusCode
+                  .json(ErrorResponse);
+    }
+}
+
+
+
 /**async function getAirports(req,res)
 {
     try{ 
@@ -185,5 +209,6 @@ async function deleteAirport(req,res)
 module.exports = {
     createFlight,
     getAllFlights,
+    getFlight,
     //updateAirplane
 }
