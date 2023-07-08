@@ -105,6 +105,36 @@ async function getFlight(req,res)
     }
 }
 
+async function updateSeats(req,res)
+{
+     
+     try { 
+          
+         const response  = await FlightService.updateSeats({
+              
+            flightID: req.params.id,
+             seats : req.body.seats,
+             dec : req.body.dec,
+             
+         });
+
+         SuccessResponse.data = response;
+
+         return res.
+                   status(StatusCodes.OK)
+                  .json( SuccessResponse );
+
+        
+     } catch (error) {
+
+        ErrorResponse.error = error 
+        return res
+                  .status(error.statusCode) //Error has Self Property statusCode we simply not write again we just
+                                            //Pass it with statusCode
+                  .json(ErrorResponse);
+        
+     }
+}
 
 
 /**async function getAirports(req,res)
@@ -210,5 +240,6 @@ module.exports = {
     createFlight,
     getAllFlights,
     getFlight,
+    updateSeats,
     //updateAirplane
 }
